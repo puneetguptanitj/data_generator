@@ -1,6 +1,5 @@
 import psycopg2
 from datetime import datetime
-from time import sleep
 
 con = psycopg2.connect(database="postgres", user="postgres", password="postgres", host="127.0.0.1", port="5432")
 cur = con.cursor()
@@ -41,7 +40,7 @@ def generate_create_records():
     batch_size = 100
     number_of_batches = int(total_num_of_resources/batch_size)
     for j in range(number_of_batches):
-        # insert in batches of 50
+        # insert in batches
         insert_command = """INSERT into changes VALUES """
         for i in range(batch_size):
             arn = "arn" + str(j*batch_size + i)
@@ -56,6 +55,7 @@ def generate_create_records():
 def generate_update_records():
     for i in range(total_num_of_resources):
         arn = "arn" + str(i)
+        #Todo derive below numbers from distribution
         if i < 200:
             insert_update_records_for_arn(arn, 43200)
         elif i < 32000:
