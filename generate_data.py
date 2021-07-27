@@ -66,14 +66,10 @@ def generate_update_records():
             insert_update_records_for_arn(arn, 12)
         elif i < 200000:
             insert_update_records_for_arn(arn, 4)
+
+
 setup
 generate_create_records
 generate_update_records
 con.close()
-
-
-
-
-# insert update records
-
 
