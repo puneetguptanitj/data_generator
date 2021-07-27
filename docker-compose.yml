@@ -1,0 +1,21 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    ports:
+      -  "5432:5432" #exposing to host as well to work directly from mac
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    image: python:3.7 #can be used as python playground
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - .:/code
+    depends_on:
+      - db
