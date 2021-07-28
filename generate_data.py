@@ -57,19 +57,15 @@ def generate_update_records():
         arn = "arn" + str(i)
         #Todo derive below numbers from distribution
         if i < 200:
-            insert_update_records_for_arn(arn, 43200)
-        elif i < 32000:
             insert_update_records_for_arn(arn, 720)
-        elif i < 132000:
+        elif i < 2200:
+            insert_update_records_for_arn(arn, 120)
+        elif i < 12200:
             insert_update_records_for_arn(arn, 30)
-        elif i < 192000:
-            insert_update_records_for_arn(arn, 12)
-        elif i < 200000:
-            insert_update_records_for_arn(arn, 4)
 
 
-setup
-generate_create_records
-generate_update_records
+setup()
+generate_create_records()
+generate_update_records()
 con.close()
 
