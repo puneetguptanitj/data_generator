@@ -6,7 +6,7 @@ services:
       resources:
         limits:
           cpus: '2'
-          memory: '8g'
+          memory: '2g'
     image: postgres
     ports:
       -  "5432:5432" #exposing to host as well to work directly from mac
