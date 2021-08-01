@@ -6,8 +6,9 @@ con = psycopg2.connect(database="postgres", user="postgres", password="postgres"
 cur = con.cursor()
 iterations=50
 batch_size = 50
+percentile=99
 
-def get_median_time_for_query(query, iterations):
+def get_time_for_query(query, iterations):
 	query_times=[]
 	for _ in range(iterations):
 		#Query to get entire snapshot of resources
@@ -15,7 +16,7 @@ def get_median_time_for_query(query, iterations):
 		cur.execute(query)
 		end = time.time()
 	query_times.append(end-start)
-	return numpy.percentile(query_times, 99)
+	return numpy.percentile(query_times, percentile)
 
 time_to_fetch_all_arns = get_median_time_for_query('''select changes.arn, changes.resource, changes.event_time, changes.record_type from changes 
 					INNER JOIN (SELECT changes.arn, max(event_time) as max_time
