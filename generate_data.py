@@ -1,7 +1,7 @@
 import psycopg2
 from datetime import datetime, timedelta
 
-con = psycopg2.connect(database="postgres", user="postgres", password="postgres", host="127.0.0.1", port="5432")
+con = psycopg2.connect(database="postgres", user="postgres", password="postgres", host="192.168.68.111", port="5432")
 cur = con.cursor()
 
 def insert_update_records_for_arn(arn, increments_in_hours):
@@ -33,6 +33,7 @@ def setup():
         EVENT_TIME TIMESTAMP NOT NULL,
         RECORD_TYPE OPERATION NOT NULL
     );''')
+    cur.execute('''create index arn_index on changes(arn);''')
     con.commit()
 
 total_num_of_resources = 200000

@@ -2,6 +2,11 @@ version: "3.9"
    
 services:
   db:
+    deploy:
+      reosources:
+        limits:
+          cpus: '2'
+          memory: '8g'
     image: postgres
     ports:
       -  "5432:5432" #exposing to host as well to work directly from mac
