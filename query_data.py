@@ -30,3 +30,4 @@ time_to_fetch_one_arn = get_time_for_query('''select changes.arn, changes.resour
 						ON changes.arn = most_recent.arn and changes.event_time = most_recent.max_time Where changes.record_type != 'DELETE' and changes.arn LIKE 'arn0' order by event_time DESC limit ''' +  str(batch_size) + ''';''', iterations)
 
 print ("99 percentile time to get resource timeline for one arn " + str(batch_size) + " records at a time = " + str(time_to_fetch_one_arn))
+con.close()
